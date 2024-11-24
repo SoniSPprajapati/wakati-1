@@ -1,2 +1,8 @@
-# wakati
-Read time analysis API built using Hono
+```
+npm install
+npm run dev
+```
+
+```
+npm run deploy
+```
