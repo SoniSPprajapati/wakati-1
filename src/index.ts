@@ -26,7 +26,22 @@ app.get("/api/calculate", (c) => {
 
   const readingTime = calculateReadingTime(sentence, Number(wpm) || defaultWPM);
 
-  return c.json({ readingTime });
+  return c.json({ ...readingTime });
+});
+
+// @desc Calculate reading time
+// @route POST /api/calculate
+// @access public
+app.post("/api/calculate", async (c) => {
+  const { sentence, wpm } = await c.req.json();
+
+  if (!sentence) {
+    return c.json({ message: "Field sentence is required" }, 400);
+  }
+
+  const readingTime = calculateReadingTime(sentence, Number(wpm) || defaultWPM);
+
+  return c.json({ ...readingTime });
 });
 
 export default app;
