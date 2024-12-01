@@ -2,20 +2,31 @@ import { Hono } from "hono";
 
 const app = new Hono();
 
-// Health Route
-app.get("/status", (c) => {
-  return c.json({ message: "Service is running. 🚀" });
-});
+let defaultWPM = 238;
+
+function calculateReadingTime(sentence: string, wpm: number) {
+  const wordCount: number = sentence.split(/\s+/).length;
+  const minutes: number = wordCount / wpm;
+  const seconds: number = minutes * 60;
+  return {
+    wordCount,
+    minutes,
+    seconds,
+    wpm,
+  };
+}
 
 app.get("/", (c) => {
-  return c.html(`<h1>Wakati API!</h1>`);
-});
+  const sentence = c.req.query("sentence");
+  const wpm = c.req.query("wpm"); // Optional
 
-app.get("/api/calculate", (c) => {
-  const text = c.req.query("text");
-  const wpm = c.req.query("wpm");
+  if (!sentence) {
+    return c.json({ message: "Field sentence is required" }, 400);
+  }
 
-  return c.json({ message: text, wpm });
+  const readingTime = calculateReadingTime(sentence, Number(wpm) || defaultWPM);
+
+  return c.json({ readingTime });
 });
 
 export default app;
