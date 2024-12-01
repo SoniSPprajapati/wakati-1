@@ -1,27 +1,22 @@
 import { Hono } from "hono";
+import { calculateReadingTime } from "./utils";
 
 const app = new Hono();
 
 let defaultWPM = 238;
 
-function calculateReadingTime(sentence: string, wpm: number) {
-  const wordCount: number = sentence.split(/\s+/).length;
-  const minutes: number = wordCount / wpm;
-  const seconds: number = minutes * 60;
-  return {
-    wordCount,
-    minutes: Number(minutes.toFixed(2)),
-    seconds: Number(seconds.toFixed(2)),
-    wpm,
-  };
-}
-
-// === Routes ===
+// ====== MARK: API routes
+// @desc API status
+// @route GET /status
+// @access public
 app.get("/status", (c) => {
   return c.json({ message: "API is active 🚀", status: "ok" });
 });
 
-app.get("/", (c) => {
+// @desc Calculate reading time
+// @route GET /api/calculate
+// @access public
+app.get("/api/calculate", (c) => {
   const sentence = c.req.query("sentence");
   const wpm = c.req.query("wpm"); // Optional
 
