@@ -10,11 +10,16 @@ function calculateReadingTime(sentence: string, wpm: number) {
   const seconds: number = minutes * 60;
   return {
     wordCount,
-    minutes,
-    seconds,
+    minutes: Number(minutes.toFixed(2)),
+    seconds: Number(seconds.toFixed(2)),
     wpm,
   };
 }
+
+// === Routes ===
+app.get("/status", (c) => {
+  return c.json({ message: "API is active 🚀", status: "ok" });
+});
 
 app.get("/", (c) => {
   const sentence = c.req.query("sentence");
