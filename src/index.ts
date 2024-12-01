@@ -1,8 +1,11 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { calculateReadingTime } from "./utils";
 import html from "./index.html";
 
 const app = new Hono();
+
+app.use(cors()); // Middleware
 
 let defaultWPM = 238;
 
