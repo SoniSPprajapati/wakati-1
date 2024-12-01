@@ -1,11 +1,18 @@
 import { Hono } from "hono";
 import { calculateReadingTime } from "./utils";
+import html from "./index.html";
 
 const app = new Hono();
 
 let defaultWPM = 238;
 
 // ====== MARK: API routes
+// @desc Root route
+// @route GET /
+app.get("/", (c) => {
+  return c.html(html);
+});
+
 // @desc API status
 // @route GET /status
 // @access public

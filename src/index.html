@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wakati API &mdash; Calculate Read Time</title>
+
+    <!-- New CSS -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <h1>Wakati API</h1>
+      <p>Calculate Read Time</p>
+    </header>
+    <main>
+      <h2>Usage</h2>
+      <p>
+        This API calculate the reading time of a sentence. It supports both GET
+        and POST requests. The default reading speed is 238 words per minute.
+      </p>
+      <pre><code>curl -X GET "https://wakati.ritoho8508.workers.dev/api/calculate?sentence=This+is+a+sentence+to+calculate+the+reading+time+of."
+
+curl -X POST "https://wakati.ritoho8508.workers.dev/api/calculate" \
+-H "Content-Type: application/json" \
+-d '{"sentence": "This is a sentence to calculate the reading time of."}'</code></pre>
+
+      <h2>API Documentation</h2>
+      <p>
+        API documentation is available at
+        <a href="https://github.com/wakati-api/api-docs"
+          >https://github.com/wakati-api/api-docs</a
+        >
+      </p>
+
+      <h2>API Endpoints</h2>
+      <ul>
+        <li><a href="/api/calculate">/api/calculate</a></li>
+        <li><a href="/status">/status</a></li>
+      </ul>
+    </main>
+  </body>
+</html>
